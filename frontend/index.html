@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>HintWise AI – Think Smarter. Solve Step by Step.</title>
+  <meta name="description" content="HintWise AI guides students through math word problems with step-by-step hints instead of final answers.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Newsreader:opsz,wght@6..72,500;6..72,600&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <a class="skip-link" href="#tutor">Skip to tutor</a>
+
+  <header class="nav">
+    <div class="container nav__inner">
+      <a class="brand" href="#home" aria-label="HintWise AI home">
+        <svg class="brand__mark" viewBox="0 0 32 32" aria-hidden="true">
+          <rect width="32" height="32" rx="9" fill="#14213d"/>
+          <path d="M8 22h5v-5h5v-5h6" fill="none" stroke="#9cc2f5" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>
+          <circle cx="24" cy="12" r="2" fill="#9cc2f5"/>
+        </svg>
+        <span class="brand__name">HintWise AI</span>
+      </a>
+      <nav aria-label="Primary">
+        <ul class="nav__links">
+          <li><a href="#home">Home</a></li>
+          <li><a href="#how-it-works">How It Works</a></li>
+          <li><a href="#about">About</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero" id="home">
+      <div class="container hero__grid">
+        <div class="hero__copy">
+          <p class="tagline">Think Smarter. Solve Step by Step.</p>
+          <h1>Math Made Easier, One Hint at a Time.</h1>
+          <p class="lead">Stuck on a math problem? Let HintWise guide your thinking with intelligent, step-by-step hints.</p>
+          <a class="btn btn--primary" href="#tutor">Start with a problem</a>
+        </div>
+
+        <div class="hero__visual" aria-hidden="true">
+          <svg viewBox="0 0 460 360" role="img">
+            <defs>
+              <pattern id="grid" width="28" height="28" patternUnits="userSpaceOnUse">
+                <path d="M28 0H0V28" fill="none" stroke="#14213d" stroke-opacity=".07"/>
+              </pattern>
+            </defs>
+            <rect width="460" height="360" rx="22" fill="#fffdf8" stroke="#14213d" stroke-opacity=".12"/>
+            <rect x="1" y="1" width="458" height="358" rx="21" fill="url(#grid)"/>
+            <path d="M60 300h90v-60h90v-60h90v-60h60" fill="none" stroke="#4a7fd4" stroke-width="3" stroke-dasharray="2 9" stroke-linecap="round"/>
+            <g font-family="Newsreader, Georgia, serif" font-size="34" text-anchor="middle">
+              <rect x="60" y="240" width="90" height="60" rx="12" fill="#e8f0fc" stroke="#4a7fd4" stroke-opacity=".5"/>
+              <text x="105" y="281" fill="#14213d">5</text>
+              <rect x="150" y="180" width="90" height="60" rx="12" fill="#e8f0fc" stroke="#4a7fd4" stroke-opacity=".5"/>
+              <text x="195" y="221" fill="#14213d">+</text>
+              <rect x="240" y="120" width="90" height="60" rx="12" fill="#e8f0fc" stroke="#4a7fd4" stroke-opacity=".5"/>
+              <text x="285" y="161" fill="#14213d">3</text>
+              <rect x="330" y="60" width="70" height="60" rx="12" fill="#14213d"/>
+              <text x="365" y="101" fill="#9cc2f5">?</text>
+            </g>
+            <circle cx="105" cy="222" r="6" fill="#4a7fd4"/>
+            <circle cx="195" cy="162" r="6" fill="#4a7fd4"/>
+            <circle cx="285" cy="102" r="6" fill="#4a7fd4"/>
+          </svg>
+        </div>
+      </div>
+    </section>
+
+    <section class="tutor" id="tutor" aria-labelledby="tutor-title">
+      <div class="container container--narrow">
+        <form class="card workspace" id="problemForm" novalidate>
+          <h2 id="tutor-title">What are you working on?</h2>
+          <p class="muted">Paste or type your math word problem. You'll get a hint, not the answer.</p>
+
+          <label class="sr-only" for="problemInput">Math word problem</label>
+          <textarea id="problemInput" name="question" rows="6" maxlength="1000"
+            placeholder="Example: Ali has 5 apples. He buys 3 more apples. How many apples does he have now?"
+            aria-describedby="charCount formError"></textarea>
+
+          <div class="workspace__meta">
+            <p class="form-error" id="formError" role="alert" hidden></p>
+            <span class="counter" id="charCount" aria-live="polite">0 / 1000</span>
+          </div>
+
+          <div class="workspace__actions">
+            <button type="submit" class="btn btn--primary" id="generateBtn">
+              <span class="btn__spinner" aria-hidden="true"></span>
+              <span class="btn__label">Generate Hint</span>
+            </button>
+            <button type="button" class="btn btn--ghost" id="clearBtn">Clear</button>
+          </div>
+        </form>
+
+        <section class="result" id="resultSection" aria-live="polite" aria-label="Hint result" hidden>
+          <div class="card result__card" id="loadingCard" hidden>
+            <div class="loader" aria-hidden="true"><span></span><span></span><span></span></div>
+            <p>Thinking through your problem. This can take a few seconds.</p>
+          </div>
+
+          <article class="card result__card result__card--hint" id="hintCard" hidden>
+            <header class="result__head">
+              <span class="badge">HintWise AI Tutor</span>
+            </header>
+            <p class="result__question" id="hintQuestion"></p>
+            <div class="result__hint" id="hintText"></div>
+            <p class="muted result__note">Use this hint to take the next step yourself, then try again if you're still stuck.</p>
+          </article>
+
+          <div class="card result__card result__card--error" id="errorCard" role="alert" hidden>
+            <h3>We couldn't get a hint</h3>
+            <p id="errorText"></p>
+          </div>
+        </section>
+      </div>
+    </section>
+
+    <section class="steps" id="how-it-works" aria-labelledby="steps-title">
+      <div class="container">
+        <h2 id="steps-title" class="section-title">How It Works</h2>
+        <ol class="steps__list">
+          <li class="step">
+            <span class="step__icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24"><path d="M4 20l4.5-1 10-10a2.1 2.1 0 00-3-3l-10 10L4 20zM14 7l3 3"/></svg>
+            </span>
+            <h3>Enter Your Problem</h3>
+            <p>Type or paste any math word problem you're stuck on.</p>
+          </li>
+          <li class="step">
+            <span class="step__icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24"><path d="M9 18h6M10 21h4M12 3a6 6 0 00-3.5 10.9c.6.5 1 1.2 1 2V16h5v-.1c0-.8.4-1.5 1-2A6 6 0 0012 3z"/></svg>
+            </span>
+            <h3>Get an Intelligent Hint</h3>
+            <p>The tutor points you toward the right idea without giving away the answer.</p>
+          </li>
+          <li class="step">
+            <span class="step__icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>
+            </span>
+            <h3>Think, Learn and Solve</h3>
+            <p>Use the hint to work out the solution yourself and build real understanding.</p>
+          </li>
+        </ol>
+      </div>
+    </section>
+
+    <section class="about" id="about" aria-labelledby="about-title">
+      <div class="container container--narrow">
+        <h2 id="about-title" class="section-title">About HintWise</h2>
+        <p class="about__quote">Guide students toward the answer, don't simply give them the answer.</p>
+        <p class="muted">HintWise AI is a math tutoring assistant built on a Qwen2.5-1.5B-Instruct model fine-tuned with QLoRA to produce helpful hints for word problems.</p>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container footer__inner">
+      <div>
+        <p class="brand__name">HintWise AI</p>
+        <p class="muted">An AI math tutor that helps students think through problems step by step.</p>
+      </div>
+      <p class="footer__powered">Powered by Fine-Tuned Qwen2.5 Model</p>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>

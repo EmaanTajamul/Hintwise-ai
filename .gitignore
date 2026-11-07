@@ -1,0 +1,23 @@
+# Python
+__pycache__/
+*.py[cod]
+venv/
+
+# Secrets
+.env
+.env.*
+
+# IDE
+.vscode/
+
+# System
+.DS_Store
+Thumbs.db
+
+# Cache
+.cache/
+*.log
+
+# Training datasets
+math_train_alpaca.jsonl
+math_test.jsonl
