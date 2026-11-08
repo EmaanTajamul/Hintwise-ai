@@ -4,7 +4,7 @@ import requests
 
 # ---------------- CONFIG ----------------
 
-API_URL = "https://tangy-tips-care.loca.lt/generate-hint"
+API_URL = "https://rude-walls-remain.loca.lt/generate-hint"
 
 st.set_page_config(
     page_title="HintWise AI",
@@ -122,7 +122,8 @@ def generate_hints(question):
     response = requests.post(
         API_URL,
         json={"question": question},
-        timeout=180
+        timeout=180,
+        headers={"bypass-tunnel-reminder": "true"},
     )
 
     response.raise_for_status()
