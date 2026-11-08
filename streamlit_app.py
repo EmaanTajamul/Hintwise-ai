@@ -92,6 +92,13 @@ st.markdown("""
     padding: 35px 0 10px;
     font-size: 13px;
 }
+header[data-testid="stHeader"] {
+    display: none;
+}
+
+.block-container {
+    padding-top: 1rem;
+}
 </style>
 """, unsafe_allow_html=True)
 
